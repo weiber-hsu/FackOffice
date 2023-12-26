@@ -14,12 +14,13 @@ public class RegisterService : IRegisterService
 
     public async Task<string?> RegisterUser(RegisterDto registerDto)
     {
+        var member = registerDto.ToMember();
         if (registerDto.Recommend != null)
         {
-            _memberRepo.GetMemberByInvitationCode(registerDto.Recommend);
+            var invitationCodeOwner = _memberRepo.GetMemberByInvitationCode(registerDto.Recommend);
+            member.agent_fk = invitationCodeOwner.pk;
         }
 
-        var member = registerDto.ToMember();
         member.GetInvitationCode();
         return await _memberRepo.Register(member);
     }
