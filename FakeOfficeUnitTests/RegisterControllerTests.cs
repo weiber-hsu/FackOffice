@@ -10,6 +10,7 @@ namespace FakeOfficeUnitTests;
 
 public class RegisterControllerTests
 {
+    private const string? AnyInvitationCode = "AnyCode";
     private RegisterController _registerController;
     private IRegisterService _registerService;
 
@@ -26,7 +27,6 @@ public class RegisterControllerTests
         var actionResult = await _registerController.Register(new RegisterRequest());
         var result = actionResult as OkObjectResult;
         actionResult.Should().BeOfType<OkObjectResult>();
-        result?.Value.Should().BeEquivalentTo("Success");
     }
 
     [Test]

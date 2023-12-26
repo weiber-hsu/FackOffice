@@ -1,6 +1,7 @@
 ﻿using FakeOffice.Models;
 using FakeOffice.Repository;
 using FakeOffice.Service;
+using FluentAssertions;
 using NSubstitute;
 
 namespace FakeOfficeUnitTests;
@@ -24,8 +25,16 @@ public class RegisterServiceTests
     public void should_call_repo_with_data()
     {
         _registerService.RegisterUser(GivenRegisterDto(AnyUserName, AnyRecommend));
-        _memberRepo.Received().Register(Arg.Is<Member>(m => 
+
+        _memberRepo.Received().Register(Arg.Is<Member>(m =>
             m.username == AnyUserName && m.recommend == AnyRecommend));
+    }
+
+    [Test]
+    public async Task should_return_invitation_code()
+    {
+        var result = await _registerService.RegisterUser(GivenRegisterDto(AnyUserName, AnyRecommend));
+        _memberRepo.Received().Register(Arg.Is<Member>(m => m.invitation_code.Length == 7));
     }
 
     private static RegisterDto GivenRegisterDto(string? userName, string? anyRecommend)
