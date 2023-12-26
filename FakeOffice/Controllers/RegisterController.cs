@@ -18,6 +18,11 @@ public class RegisterController : ControllerBase
     [HttpPost("register")]
     public IActionResult Register(RegisterRequest request)
     {
+        _registerService.RegisterUser(new RegisterDto()
+        {
+            UserName = request.UserName,
+            Recommend = request.Recommend
+        });
         return Ok("Success");
     }
 }

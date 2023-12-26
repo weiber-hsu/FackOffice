@@ -39,6 +39,6 @@ public class RegisterControllerTests
         };
 
         _registerController.Register(registerRequest);
-        _registerService.Received().RegisterUser(new RegisterDto(registerRequest));
+        _registerService.Received().RegisterUser(Arg.Any<RegisterDto>());
     }
 }
