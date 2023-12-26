@@ -43,6 +43,13 @@ public class RegisterServiceTests
         _memberRepo.Received().GetMemberByInvitationCode(AnyRecommend);
     }
 
+    [Test]
+    public async Task should_not_call_get_member_when_recommend_is_null()
+    {
+        await _registerService.RegisterUser(GivenRegisterDto(AnyUserName, null));
+        _memberRepo.DidNotReceive().GetMemberByInvitationCode(Arg.Any<string>());
+    }
+
     private static RegisterDto GivenRegisterDto(string? userName, string? anyRecommend)
     {
         return new RegisterDto()
