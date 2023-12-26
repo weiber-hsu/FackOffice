@@ -17,9 +17,9 @@ public class RegisterController : ControllerBase
     }
 
     [HttpPost("register")]
-    public IActionResult Register(RegisterRequest request)
+    public async Task<IActionResult> Register(RegisterRequest request)
     {
-        _registerService.RegisterUser(new RegisterDto()
+        await _registerService.RegisterUser(new RegisterDto()
         {
             UserName = request.UserName,
             Recommend = request.Recommend

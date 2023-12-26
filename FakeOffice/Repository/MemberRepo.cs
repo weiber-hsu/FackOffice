@@ -19,7 +19,9 @@ public class MemberRepo : IMemberRepo
 
     public async Task Register(Member member)
     {
-        throw new NotImplementedException();
+        var sql = "INSERT INTO YourTableName (agent_fk, username, recommend, create_time, invitation_code, pk) " + 
+                          $"VALUES ({member.agent_fk}, {member.username}, {member.recommend}, {member.create_time}, {member.invitation_code}, {member.pk})";
+        await _dbConnection.QueryAsync(sql);
     }
 
     public async Task<Member> Get(int memberId)

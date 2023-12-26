@@ -14,10 +14,10 @@ public class RegisterService : IRegisterService
         _memberRepo = memberRepo;
     }
 
-    public void RegisterUser(RegisterDto registerDto)
+    public async Task RegisterUser(RegisterDto registerDto)
     {
         var member = registerDto.ToMember();
         member.GetInvitationCode();
-        _memberRepo.Register(member);
+        await _memberRepo.Register(member);
     }
 }
