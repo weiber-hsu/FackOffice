@@ -7,6 +7,8 @@ namespace FakeOfficeUnitTests;
 [TestFixture]
 public class RegisterServiceTests
 {
+    private const string? AnyUserName = "AnyUserName";
+    private const string? AnyRecommend = "AnyRecommend";
     private RegisterService _registerService;
     private IMemberRepo _memberRepo;
 
@@ -18,9 +20,19 @@ public class RegisterServiceTests
     }
 
     [Test]
-    public void should_call_repo()
+    public void should_call_repo_with_data()
     {
-        _registerService.RegisterUser(new RegisterDto());
-        _memberRepo.Received().Register(Arg.Any<Member>());
+        _registerService.RegisterUser(GivenRegisterDto(AnyUserName, AnyRecommend));
+        _memberRepo.Received().Register(Arg.Is<Member>(m => 
+            m.UserName == AnyUserName && m.Recommend == AnyRecommend));
+    }
+
+    private static RegisterDto GivenRegisterDto(string? userName, string? anyRecommend)
+    {
+        return new RegisterDto()
+        {
+            UserName = userName,
+            Recommend = anyRecommend
+        };
     }
 }
