@@ -9,4 +9,9 @@ public class MemberRepo : IMemberRepo
     {
         throw new NotImplementedException();
     }
+
+    public Member Get(int memberId)
+    {
+        throw new NotImplementedException();
+    }
 }
