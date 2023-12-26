@@ -2,10 +2,17 @@
 
 namespace FakeOffice.Service;
 
-class RegisterService : IRegisterService
+public class RegisterService : IRegisterService
 {
+    private IMemberRepo _memberRepo;
+
+    public RegisterService(IMemberRepo memberRepo)
+    {
+        _memberRepo = memberRepo;
+    }
+
     public void RegisterUser(RegisterDto registerDto)
     {
-        throw new NotImplementedException();
+        
     }
 }
