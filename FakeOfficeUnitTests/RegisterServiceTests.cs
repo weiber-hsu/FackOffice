@@ -10,7 +10,6 @@ public class RegisterServiceTests
 {
     private const string? AnyUserName = "AnyUserName";
     private const string? AnyRecommend = "AnyRecommend";
-    private const string AnyInvitationCode = "AnyInvitationCode";
     private IMemberRepo _memberRepo;
     private RegisterService _registerService;
 
@@ -41,7 +40,7 @@ public class RegisterServiceTests
     public async Task should_call_get_member_by_invitation_code()
     {
         await _registerService.RegisterUser(GivenRegisterDto(AnyUserName, AnyRecommend));
-        _memberRepo.Received().GetMemberByInvitationCode(AnyInvitationCode);
+        _memberRepo.Received().GetMemberByInvitationCode(AnyRecommend);
     }
 
     private static RegisterDto GivenRegisterDto(string? userName, string? anyRecommend)
