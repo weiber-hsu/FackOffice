@@ -15,6 +15,12 @@ public class TransactionService : ITransactionService
 
     public void CreateTransactions(int trxNumber)
     {
-        _borrowFeeRepo.InsertBorrowFees(new List<BorrowFee>());
+        var borrowFees = new List<BorrowFee>();
+        for (int i = 0; i < trxNumber; i++)
+        {
+           borrowFees.Add(new BorrowFee());   
+        }
+
+        _borrowFeeRepo.InsertBorrowFees(borrowFees);
     }
 }
