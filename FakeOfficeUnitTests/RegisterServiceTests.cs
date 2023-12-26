@@ -10,6 +10,7 @@ public class RegisterServiceTests
 {
     private const string? AnyUserName = "AnyUserName";
     private const string? AnyRecommend = "AnyRecommend";
+    private const int AnyPk = 123;
     private IMemberRepo _memberRepo;
     private RegisterService _registerService;
 
@@ -53,6 +54,7 @@ public class RegisterServiceTests
     [Test]
     public async Task agent_fk_should_not_be_zero_with_recommend_code()
     {
+        _memberRepo.GetMemberByInvitationCode(Arg.Any<string>()).Returns(new Member() { pk = AnyPk });
         await _registerService.RegisterUser(GivenRegisterDto(AnyUserName, AnyRecommend));
         await _memberRepo.Received().Register(Arg.Is<Member>(m => m.agent_fk != 0));
     }
