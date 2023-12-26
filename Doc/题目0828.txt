@@ -27,7 +27,7 @@ rule:
 所有的交易時間, 一定都是在客戶註冊後才會發生
 客戶第二次以後交易,設定 borrow_fee.type = 2, 交易期限 18個月
 **
-a.
+a. V
 Given: user
 When: sign up
 Then: create user in DB, and agent_fk=0

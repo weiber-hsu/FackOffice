@@ -4,5 +4,5 @@ namespace FakeOffice.Service;
 
 public interface IRegisterService
 {
-    Task RegisterUser(RegisterDto registerDto);
+    Task<string?> RegisterUser(RegisterDto registerDto);
 }

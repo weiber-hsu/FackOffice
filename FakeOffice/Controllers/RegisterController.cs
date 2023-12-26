@@ -19,11 +19,12 @@ public class RegisterController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
-        await _registerService.RegisterUser(new RegisterDto()
+        var result = await _registerService.RegisterUser(new RegisterDto()
         {
             UserName = request.UserName,
             Recommend = request.Recommend
         });
-        return Ok("Success");
+
+        return Ok(result);
     }
 }
