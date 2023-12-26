@@ -25,7 +25,7 @@ public class RegisterServiceTests
     {
         _registerService.RegisterUser(GivenRegisterDto(AnyUserName, AnyRecommend));
         _memberRepo.Received().Register(Arg.Is<Member>(m => 
-            m.UserName == AnyUserName && m.Recommend == AnyRecommend));
+            m.username == AnyUserName && m.recommend == AnyRecommend));
     }
 
     private static RegisterDto GivenRegisterDto(string? userName, string? anyRecommend)

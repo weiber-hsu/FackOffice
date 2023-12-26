@@ -25,9 +25,9 @@ public class MemberRepo : IMemberRepo
         var result =( await _dbConnection.QueryAsync(sql)).FirstOrDefault();
         return new Member()
         {
-            UserName = result.username as string,
-            Recommend = result.recommend as string,
-            agent_fk = (int)result.agent_fk,
+            username = result.username as string,
+            recommend = result.recommend as string,
+            agent_fk = (int) result.agent_fk,
             invitation_code = result.invitation_code as string,
             create_time = (DateTime) result.create_time,
             pk = (int) result.pk

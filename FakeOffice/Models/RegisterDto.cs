@@ -10,8 +10,8 @@ public class RegisterDto
     {
         return new Member()
         {
-            UserName = UserName,
-            Recommend = Recommend
+            username = UserName,
+            recommend = Recommend
         };
     }
 }
