@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FakeOffice.Models;
+using FakeOffice.Service;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FakeOffice.Controllers;
 
@@ -6,13 +8,16 @@ namespace FakeOffice.Controllers;
 [Route("api")]
 public class RegisterController : ControllerBase
 {
+    private IRegisterService _registerService;
+
+    public RegisterController(IRegisterService registerService)
+    {
+        _registerService = registerService;
+    }
+
     [HttpPost("register")]
     public IActionResult Register(RegisterRequest request)
     {
         return Ok("Success");
     }
-}
-public class RegisterRequest
-{
-    public string? UserName { get; set; }
 }
