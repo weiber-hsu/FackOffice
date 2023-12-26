@@ -13,6 +13,6 @@ public class RegisterService : IRegisterService
 
     public void RegisterUser(RegisterDto registerDto)
     {
-        
+        _memberRepo.Register(new Member());
     }
 }
