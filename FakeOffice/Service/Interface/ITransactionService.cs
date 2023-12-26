@@ -2,5 +2,5 @@
 
 public interface ITransactionService
 {
-    void CreateTransactions(int trxNumber);
+    Task CreateTransactions(int trxNumber);
 }

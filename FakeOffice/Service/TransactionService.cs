@@ -8,20 +8,23 @@ public class TransactionService : ITransactionService
 {
     private readonly IBorrowFeeRepo _borrowFeeRepo;
     private readonly IMemberRepo _memberRepo;
+    private Random _random;
 
     public TransactionService(IBorrowFeeRepo borrowFeeRepo, IMemberRepo memberRepo)
     {
+        _random = new Random();
         _borrowFeeRepo = borrowFeeRepo;
         _memberRepo = memberRepo;
     }
 
-    public void CreateTransactions(int trxNumber)
+    public async Task CreateTransactions(int trxNumber)
     {
-        var allMembersPkAndCreateDay = _memberRepo.GetAllMembersPkAndCreateDay();
+        var allMembersPkAndCreateDay = await _memberRepo.GetAllMembersPkAndCreateDay();
         var borrowFees = new List<BorrowFeeDto>();
         for (int i = 0; i < trxNumber; i++)
         {
-            borrowFees.Add(new BorrowFeeDto().GivenBorrowFeeDto(0, DateTime.Now));
+            var member = allMembersPkAndCreateDay[_random.Next(0, allMembersPkAndCreateDay.Count-1)];
+            borrowFees.Add(new BorrowFeeDto().GivenBorrowFeeDto(member.pk, member.create_time));
         }
 
         _borrowFeeRepo.InsertBorrowFees(borrowFees);

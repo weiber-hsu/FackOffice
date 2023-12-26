@@ -32,11 +32,12 @@ public class MemberRepo : IMemberRepo
     public async Task<Member?> GetMemberByInvitationCode(string recommend)
     {
         var sql = $"SELECT pk From member where invitation_code = '{recommend}'";
-        return (await _dbConnection.QueryAsync<Member>(sql)).FirstOrDefault();    
+        return (await _dbConnection.QueryAsync<Member>(sql)).FirstOrDefault();
     }
 
-    public List<Member> GetAllMembersPkAndCreateDay()
+    public async Task<List<Member>> GetAllMembersPkAndCreateDay()
     {
-        throw new NotImplementedException();
+        var sql = $"SELECT pk, create_time From member";
+        return (await _dbConnection.QueryAsync<Member>(sql)).ToList();
     }
 }
