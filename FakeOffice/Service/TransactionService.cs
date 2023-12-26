@@ -6,7 +6,7 @@ namespace FakeOffice.Service;
 
 public class TransactionService : ITransactionService
 {
-    private IBorrowFeeRepo _borrowFeeRepo;
+    private readonly IBorrowFeeRepo _borrowFeeRepo;
 
     public TransactionService(IBorrowFeeRepo borrowFeeRepo)
     {
@@ -15,10 +15,10 @@ public class TransactionService : ITransactionService
 
     public void CreateTransactions(int trxNumber)
     {
-        var borrowFees = new List<BorrowFee>();
+        var borrowFees = new List<BorrowFeeDto>();
         for (int i = 0; i < trxNumber; i++)
         {
-           borrowFees.Add(new BorrowFee());   
+            borrowFees.Add(new BorrowFeeDto().GivenBorrowFeeDto(0, DateTime.Now));
         }
 
         _borrowFeeRepo.InsertBorrowFees(borrowFees);

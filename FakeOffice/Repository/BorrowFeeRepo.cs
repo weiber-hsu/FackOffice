@@ -5,7 +5,7 @@ namespace FakeOffice.Repository;
 
 class BorrowFeeRepo : IBorrowFeeRepo
 {
-    public void InsertBorrowFees(List<BorrowFee> borrowFees)
+    public void InsertBorrowFees(List<BorrowFeeDto> borrowFees)
     {
         throw new NotImplementedException();
     }

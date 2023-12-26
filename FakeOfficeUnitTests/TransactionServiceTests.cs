@@ -23,13 +23,13 @@ public class TransactionServiceTests
     public void should_call_borrow_fee_repo()
     {
         _transactionService.CreateTransactions(AnyTrxNumber);
-        _borrowFeeRepo.Received().InsertBorrowFees(Arg.Any<List<BorrowFee>>());
+        _borrowFeeRepo.Received().InsertBorrowFees(Arg.Any<List<BorrowFeeDto>>());
     }
 
     [Test]
     public void should_call_borrow_fee_repo_with_10_Borrow_fee_data()
     {
         _transactionService.CreateTransactions(10);
-        _borrowFeeRepo.Received().InsertBorrowFees(Arg.Is<List<BorrowFee>>(l => l.Count == 10));
+        _borrowFeeRepo.Received().InsertBorrowFees(Arg.Is<List<BorrowFeeDto>>(l => l.Count == 10));
     }
 }

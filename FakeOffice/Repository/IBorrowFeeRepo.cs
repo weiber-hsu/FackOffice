@@ -4,5 +4,5 @@ namespace FakeOffice.Repository;
 
 public interface IBorrowFeeRepo
 {
-    void InsertBorrowFees(List<BorrowFee> borrowFees);
+    void InsertBorrowFees(List<BorrowFeeDto> borrowFees);
 }
