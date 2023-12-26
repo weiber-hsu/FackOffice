@@ -1,6 +1,6 @@
 ﻿using FakeOffice.Models;
 
-namespace FakeOffice.Service;
+namespace FakeOffice.Repository;
 
 public interface IMemberRepo
 {
