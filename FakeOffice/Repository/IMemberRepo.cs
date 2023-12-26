@@ -7,4 +7,5 @@ public interface IMemberRepo
     Task<string?> Register(Member member);
     Task<Member> Get(int memberId);
     Task<Member?> GetMemberByInvitationCode(string recommend);
+    void GetAllMembersPkAndCreateDay();
 }

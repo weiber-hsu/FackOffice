@@ -11,12 +11,14 @@ public class TransactionServiceTests
     private const int AnyTrxNumber = 999;
     private TransactionService _transactionService;
     private IBorrowFeeRepo _borrowFeeRepo;
+    private IMemberRepo _memberRepo;
 
     [SetUp]
     public void SetUp()
     {
         _borrowFeeRepo = Substitute.For<IBorrowFeeRepo>();
-        _transactionService = new TransactionService(_borrowFeeRepo);
+        _memberRepo = Substitute.For<IMemberRepo>();
+        _transactionService = new TransactionService(_borrowFeeRepo, _memberRepo);
     }
 
     [Test]
@@ -31,5 +33,12 @@ public class TransactionServiceTests
     {
         _transactionService.CreateTransactions(10);
         _borrowFeeRepo.Received().InsertBorrowFees(Arg.Is<List<BorrowFeeDto>>(l => l.Count == 10));
+    }
+
+    [Test]
+    public void should_call_repo_to_get_all_member_pk_and_create_day()
+    {
+        _transactionService.CreateTransactions(AnyTrxNumber);
+        _memberRepo.Received().GetAllMembersPkAndCreateDay();
     }
 }
