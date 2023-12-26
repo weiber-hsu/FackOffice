@@ -35,7 +35,7 @@ public class MemberRepo : IMemberRepo
         return (await _dbConnection.QueryAsync<Member>(sql)).FirstOrDefault();    
     }
 
-    public void GetAllMembersPkAndCreateDay()
+    public List<Member> GetAllMembersPkAndCreateDay()
     {
         throw new NotImplementedException();
     }

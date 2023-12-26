@@ -17,6 +17,7 @@ public class TransactionService : ITransactionService
 
     public void CreateTransactions(int trxNumber)
     {
+        var allMembersPkAndCreateDay = _memberRepo.GetAllMembersPkAndCreateDay();
         var borrowFees = new List<BorrowFeeDto>();
         for (int i = 0; i < trxNumber; i++)
         {
