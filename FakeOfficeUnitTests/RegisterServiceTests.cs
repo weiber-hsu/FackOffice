@@ -50,6 +50,13 @@ public class RegisterServiceTests
         _memberRepo.DidNotReceive().GetMemberByInvitationCode(Arg.Any<string>());
     }
 
+    [Test]
+    public async Task agent_fk_should_not_be_zero_with_recommend_code()
+    {
+        await _registerService.RegisterUser(GivenRegisterDto(AnyUserName, AnyRecommend));
+        await _memberRepo.Received().Register(Arg.Is<Member>(m => m.agent_fk != 0));
+    }
+
     private static RegisterDto GivenRegisterDto(string? userName, string? anyRecommend)
     {
         return new RegisterDto()
