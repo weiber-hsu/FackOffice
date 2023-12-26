@@ -1,4 +1,5 @@
-﻿using FakeOffice.Repository;
+﻿using FakeOffice.Models;
+using FakeOffice.Repository;
 using FakeOffice.Service.Interface;
 
 namespace FakeOffice.Service;
@@ -14,5 +15,6 @@ public class TransactionService : ITransactionService
 
     public void CreateTransactions(int trxNumber)
     {
+        _borrowFeeRepo.InsertBorrowFees(new List<BorrowFee>());
     }
 }
