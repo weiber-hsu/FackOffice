@@ -18,6 +18,6 @@ public class Member
         var hashCode = DateTime.Now.GetHashCode();
         var beforeEncrypt = next.ToString() + hashCode.ToString();
         var afterEncrypt =  SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(beforeEncrypt));
-        invitation_code = BitConverter.ToString(afterEncrypt).Substring(0,7);
+        invitation_code = BitConverter.ToString(afterEncrypt).Replace("-", "").Substring(0,7);
     }
 }

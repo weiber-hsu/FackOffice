@@ -19,8 +19,8 @@ public class MemberRepo : IMemberRepo
 
     public async Task Register(Member member)
     {
-        var sql = "INSERT INTO YourTableName (agent_fk, username, recommend, create_time, invitation_code, pk) " + 
-                          $"VALUES ({member.agent_fk}, {member.username}, {member.recommend}, {member.create_time}, {member.invitation_code}, {member.pk})";
+        var sql = "INSERT INTO member (agent_fk, username, recommend, create_time, invitation_code, pk) " + 
+                          $"VALUES ({member.agent_fk}, '{member.username}', '{member.recommend}', '{DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}', '{member.invitation_code}', {member.pk})";
         await _dbConnection.QueryAsync(sql);
     }
 

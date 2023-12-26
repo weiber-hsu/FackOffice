@@ -12,7 +12,6 @@ public class RegisterDto
         {
             username = UserName,
             recommend = Recommend,
-            create_time = DateTime.Now
         };
     }
 }
