@@ -59,6 +59,14 @@ public class RegisterServiceTests
         await _memberRepo.Received().Register(Arg.Is<Member>(m => m.agent_fk != 0));
     }
 
+    [Test]
+    public async Task agent_fk_should_be_zero_without_recommend_code()
+    {
+        _memberRepo.GetMemberByInvitationCode(Arg.Any<string>()).Returns(new Member());
+        await _registerService.RegisterUser(GivenRegisterDto(AnyUserName, AnyRecommend));
+        await _memberRepo.Received().Register(Arg.Is<Member>(m => m.agent_fk == 0));
+    }
+
     private static RegisterDto GivenRegisterDto(string? userName, string? anyRecommend)
     {
         return new RegisterDto()
