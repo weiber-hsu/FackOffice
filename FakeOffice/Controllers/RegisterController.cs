@@ -4,11 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FakeOffice.Controllers;
 
+//may add white list for security
 [ApiController]
 [Route("api")]
 public class RegisterController : ControllerBase
 {
-    private IRegisterService _registerService;
+    private readonly IRegisterService _registerService;
 
     public RegisterController(IRegisterService registerService)
     {
