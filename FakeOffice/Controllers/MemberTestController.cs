@@ -18,6 +18,7 @@ public class MemberTestController : ControllerBase
     [HttpGet]
     public IActionResult GetMember(int memberId)
     {
-        return Ok();
+        var member = _memberRepo.Get(memberId);
+        return Ok(member);
     }
 }
