@@ -1,6 +1,7 @@
 using FakeOffice.Controllers;
 using FakeOffice.Repository;
 using FakeOffice.Service;
+using FakeOffice.Service.Interface;
 using MySql.Data.MySqlClient;
 using NSubstitute.Extensions;
 
@@ -14,7 +15,9 @@ builder.Services.AddScoped<MySqlConnection>(_ => new MySqlConnection(connectionS
 
 builder.Services.AddControllers().AddApplicationPart(typeof(RegisterController).Assembly);
 builder.Services.AddTransient<IRegisterService, RegisterService>();
+builder.Services.AddTransient<ITransactionService, TransactionService>();
 builder.Services.AddTransient<IMemberRepo, MemberRepo>();
+builder.Services.AddTransient<IBorrowFeeRepo, BorrowFeeRepo>();
 
 var app = builder.Build();
 app.UseRouting();

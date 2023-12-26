@@ -1,6 +1,7 @@
 using FakeOffice.Controllers;
 using FakeOffice.Models;
 using FakeOffice.Service;
+using FakeOffice.Service.Interface;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;

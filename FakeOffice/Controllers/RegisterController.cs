@@ -1,5 +1,6 @@
 ﻿using FakeOffice.Models;
 using FakeOffice.Service;
+using FakeOffice.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FakeOffice.Controllers;

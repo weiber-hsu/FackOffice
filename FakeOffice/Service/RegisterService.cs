@@ -1,5 +1,6 @@
 ﻿using FakeOffice.Models;
 using FakeOffice.Repository;
+using FakeOffice.Service.Interface;
 
 namespace FakeOffice.Service;
 
