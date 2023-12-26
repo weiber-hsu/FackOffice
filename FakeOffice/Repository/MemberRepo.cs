@@ -21,8 +21,16 @@ public class MemberRepo : IMemberRepo
 
     public async Task<Member> Get(int memberId)
     {
-        string sql = "SELECT * From member";
-        var queryAsync = await _dbConnection.QueryAsync(sql);
-        return new Member();
+        string sql = $"SELECT * From member where pk = '{memberId}' ";
+        var result =( await _dbConnection.QueryAsync(sql)).FirstOrDefault();
+        return new Member()
+        {
+            UserName = result.username as string,
+            Recommend = result.recommend as string,
+            agent_fk = (int)result.agent_fk,
+            invitation_code = result.invitation_code as string,
+            create_time = (DateTime) result.create_time,
+            pk = (int) result.pk
+        };
     }
 }
