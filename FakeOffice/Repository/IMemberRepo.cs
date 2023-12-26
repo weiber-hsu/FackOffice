@@ -6,5 +6,5 @@ public interface IMemberRepo
 {
     Task<string?> Register(Member member);
     Task<Member> Get(int memberId);
-    Member GetMemberByInvitationCode(string anyInvitationCode);
+    Task<Member?> GetMemberByInvitationCode(string recommend);
 }

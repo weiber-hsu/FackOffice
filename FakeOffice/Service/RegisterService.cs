@@ -17,8 +17,8 @@ public class RegisterService : IRegisterService
         var member = registerDto.ToMember();
         if (registerDto.Recommend != null)
         {
-            var invitationCodeOwner = _memberRepo.GetMemberByInvitationCode(registerDto.Recommend);
-            member.agent_fk = invitationCodeOwner.pk;
+            var invitationCodeOwner = await _memberRepo.GetMemberByInvitationCode(registerDto.Recommend);
+            member.agent_fk = invitationCodeOwner?.pk ?? 0;
         }
 
         member.GetInvitationCode();

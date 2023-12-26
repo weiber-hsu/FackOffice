@@ -29,8 +29,9 @@ public class MemberRepo : IMemberRepo
         return result;
     }
 
-    public Member GetMemberByInvitationCode(string anyInvitationCode)
+    public async Task<Member?> GetMemberByInvitationCode(string recommend)
     {
-        throw new NotImplementedException();
+        var sql = $"SELECT pk From member where invitation_code = '{recommend}'";
+        return (await _dbConnection.QueryAsync<Member>(sql)).FirstOrDefault();    
     }
 }
