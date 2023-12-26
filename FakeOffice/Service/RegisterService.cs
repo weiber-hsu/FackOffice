@@ -1,13 +1,11 @@
-﻿using System.Security.Cryptography;
-using System.Text;
-using FakeOffice.Models;
+﻿using FakeOffice.Models;
 using FakeOffice.Repository;
 
 namespace FakeOffice.Service;
 
 public class RegisterService : IRegisterService
 {
-    private IMemberRepo _memberRepo;
+    private readonly IMemberRepo _memberRepo;
 
     public RegisterService(IMemberRepo memberRepo)
     {
