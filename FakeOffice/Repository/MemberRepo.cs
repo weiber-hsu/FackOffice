@@ -1,17 +1,28 @@
-﻿using FakeOffice.Models;
+﻿using Dapper;
+using FakeOffice.Models;
 using FakeOffice.Service;
+using MySql.Data.MySqlClient;
 
 namespace FakeOffice.Repository;
 
 public class MemberRepo : IMemberRepo
 {
+    public MySqlConnection _dbConnection;
+
+    public MemberRepo(MySqlConnection dbConnection)
+    {
+        _dbConnection = dbConnection;
+    }
+
     public void Register(Member member)
     {
         throw new NotImplementedException();
     }
 
-    public Member Get(int memberId)
+    public async Task<Member> Get(int memberId)
     {
-        throw new NotImplementedException();
+        string sql = "SELECT * From member";
+        var queryAsync = await _dbConnection.QueryAsync(sql);
+        return new Member();
     }
 }

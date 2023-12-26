@@ -16,9 +16,9 @@ public class MemberTestController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetMember(int memberId)
+    public async Task<IActionResult> GetMember(int memberId)
     {
-        var member = _memberRepo.Get(memberId);
+        var member = await _memberRepo.Get(memberId);
         return Ok(member);
     }
 }
