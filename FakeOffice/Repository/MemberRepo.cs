@@ -1,4 +1,7 @@
-﻿using Dapper;
+﻿using System.Runtime.Intrinsics.Arm;
+using System.Security.Cryptography;
+using System.Text;
+using Dapper;
 using FakeOffice.Models;
 using FakeOffice.Service;
 using MySql.Data.MySqlClient;
@@ -14,7 +17,7 @@ public class MemberRepo : IMemberRepo
         _dbConnection = dbConnection;
     }
 
-    public void Register(Member member)
+    public async Task Register(Member member)
     {
         throw new NotImplementedException();
     }

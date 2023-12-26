@@ -11,7 +11,8 @@ public class RegisterDto
         return new Member()
         {
             username = UserName,
-            recommend = Recommend
+            recommend = Recommend,
+            create_time = DateTime.Now
         };
     }
 }

@@ -1,4 +1,6 @@
-﻿using FakeOffice.Models;
+﻿using System.Security.Cryptography;
+using System.Text;
+using FakeOffice.Models;
 using FakeOffice.Repository;
 
 namespace FakeOffice.Service;
@@ -14,6 +16,8 @@ public class RegisterService : IRegisterService
 
     public void RegisterUser(RegisterDto registerDto)
     {
-        _memberRepo.Register(registerDto.ToMember());
+        var member = registerDto.ToMember();
+        member.GetInvitationCode();
+        _memberRepo.Register(member);
     }
 }
