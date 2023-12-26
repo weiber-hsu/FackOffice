@@ -28,4 +28,9 @@ public class MemberRepo : IMemberRepo
         var result = (await _dbConnection.QueryAsync<Member>(sql)).FirstOrDefault();
         return result;
     }
+
+    public Member GetMemberByInvitationCode(string anyInvitationCode)
+    {
+        throw new NotImplementedException();
+    }
 }
