@@ -21,7 +21,7 @@ public class Member
         invitation_code = BitConverter.ToString(afterEncrypt).Replace("-", "").Substring(0,7);
     }
 
-    public BorrowFeeDto CreateBorrowFeeDtoWithRandomDay(int month)
+    public BorrowFeeDto ToBorrowFeeDtoWith(int month)
     {
         var random = new RandomProvider();
         var borrowFeeDto = new BorrowFeeDto

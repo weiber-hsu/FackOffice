@@ -11,12 +11,12 @@ namespace FakeOffice.Controllers;
 public class TestingApiController : ControllerBase
 {
     private readonly IMemberRepo _memberRepo;
-    private readonly ITransactionService _transactionService;
+    private readonly IBorrowFeeService _borrowFeeService;
 
-    public TestingApiController(IMemberRepo memberRepo, ITransactionService transactionService)
+    public TestingApiController(IMemberRepo memberRepo, IBorrowFeeService borrowFeeService)
     {
         _memberRepo = memberRepo;
-        _transactionService = transactionService;
+        _borrowFeeService = borrowFeeService;
     }
 
     [HttpGet("member/{memberId}")]
@@ -29,7 +29,7 @@ public class TestingApiController : ControllerBase
     [HttpGet("Create-Fake")]
     public async Task<IActionResult> CreateFakeTrx(int trxNumber)
     {
-        await _transactionService.CreateRandomTransactions(trxNumber);
+        await _borrowFeeService.CreateRandomTransactions(trxNumber);
         return Ok();
     }
     
@@ -40,7 +40,7 @@ public class TestingApiController : ControllerBase
 
         for (int i = 0; i < 1000; i++)
         {
-            await _transactionService.CreateTransactionsWith(member, 12);
+            await _borrowFeeService.CreateBorrowFees(member, 12);
         }
         return Ok();
     }

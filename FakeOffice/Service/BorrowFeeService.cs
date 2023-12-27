@@ -4,13 +4,13 @@ using FakeOffice.Service.Interface;
 
 namespace FakeOffice.Service;
 
-public class TransactionService : ITransactionService
+public class BorrowFeeService : IBorrowFeeService
 {
     private readonly IBorrowFeeRepo _borrowFeeRepo;
     private readonly IMemberRepo _memberRepo;
     private readonly Random _random;
 
-    public TransactionService(IBorrowFeeRepo borrowFeeRepo, IMemberRepo memberRepo)
+    public BorrowFeeService(IBorrowFeeRepo borrowFeeRepo, IMemberRepo memberRepo)
     {
         _random = new Random();
         _borrowFeeRepo = borrowFeeRepo;
@@ -27,13 +27,13 @@ public class TransactionService : ITransactionService
         for (var i = 0; i < trxNumber; i++)
         {
             var randomMember = allMembersPkAndCreateDay[_random.Next(0, allMembersPkAndCreateDay.Count - 1)];
-            await CreateTransactionsWith(randomMember, 18);
+            await CreateBorrowFees(randomMember, 18);
         }
     }
 
-    public async Task CreateTransactionsWith(Member member, int randomMonth)
+    public async Task CreateBorrowFees(Member member, int randomMonth)
     {
-        var borrowFeeDtoWithRandomDay = member.CreateBorrowFeeDtoWithRandomDay(randomMonth);
-        await _borrowFeeRepo.InsertBorrowFees(borrowFeeDtoWithRandomDay);
+        var borrowFee = member.ToBorrowFeeDtoWith(randomMonth);
+        await _borrowFeeRepo.InsertBorrowFees(borrowFee);
     }
 }

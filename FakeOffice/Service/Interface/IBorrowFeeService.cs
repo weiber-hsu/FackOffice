@@ -2,8 +2,8 @@
 
 namespace FakeOffice.Service.Interface;
 
-public interface ITransactionService
+public interface IBorrowFeeService
 {
     Task CreateRandomTransactions(int trxNumber);
-    Task CreateTransactionsWith(Member member, int randomMonth);
+    Task CreateBorrowFees(Member member, int randomMonth);
 }

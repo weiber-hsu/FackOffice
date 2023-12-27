@@ -15,8 +15,8 @@ class BorrowFeeRepo : IBorrowFeeRepo
     }
     public async Task InsertBorrowFees(BorrowFeeDto borrowFees)
     {
-        var checkExsistSql = $"SELECT count(1) FROM borrow_fee WHERE member_fk = {borrowFees.MemberFk}";
-        var hasExistBorrowFee =( await _dbConnection.QueryAsync<int>(checkExsistSql)).Single();
+        var checkExistSql = $"SELECT count(1) FROM borrow_fee WHERE member_fk = {borrowFees.MemberFk}";
+        var hasExistBorrowFee =( await _dbConnection.QueryAsync<int>(checkExistSql)).Single();
 
         borrowFees.Type = hasExistBorrowFee == 0
             ? 1
