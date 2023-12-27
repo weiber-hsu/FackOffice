@@ -29,7 +29,7 @@ public class TestingApiController : ControllerBase
     [HttpGet("Create-Fake")]
     public async Task<IActionResult> CreateFakeTrx(int trxNumber)
     {
-        await _transactionService.CreateTransactions(trxNumber);
+        await _transactionService.CreateRandomTransactions(trxNumber);
         return Ok();
     }
     

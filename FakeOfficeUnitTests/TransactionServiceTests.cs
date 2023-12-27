@@ -9,9 +9,9 @@ namespace FakeOfficeUnitTests;
 public class TransactionServiceTests
 {
     private const int AnyTrxNumber = 999;
-    private TransactionService _transactionService;
     private IBorrowFeeRepo _borrowFeeRepo;
     private IMemberRepo _memberRepo;
+    private TransactionService _transactionService;
 
     [SetUp]
     public void SetUp()
@@ -22,23 +22,35 @@ public class TransactionServiceTests
     }
 
     [Test]
-    public void should_call_borrow_fee_repo()
+    public async Task should_call_borrow_fee_repo()
     {
-        _transactionService.CreateTransactions(AnyTrxNumber);
-        _borrowFeeRepo.Received().InsertBorrowFees(Arg.Any<List<BorrowFeeDto>>());
+        GivenMembersData(new Member());
+        await _transactionService.CreateRandomTransactions(AnyTrxNumber);
+        _borrowFeeRepo.Received().InsertBorrowFees(Arg.Any<BorrowFeeDto>());
     }
 
     [Test]
-    public void should_call_borrow_fee_repo_with_10_Borrow_fee_data()
+    public async Task should_call_borrow_fee_repo_with_3_Borrow_fee_data()
     {
-        _transactionService.CreateTransactions(10);
-        _borrowFeeRepo.Received().InsertBorrowFees(Arg.Is<List<BorrowFeeDto>>(l => l.Count == 10));
+        GivenMembersData(
+            new Member() { pk = 1, create_time = DateTime.Now, },
+            new Member() { pk = 2, create_time = DateTime.Now, },
+            new Member() { pk = 3, create_time = DateTime.Now, }
+            );
+        await _transactionService.CreateRandomTransactions(3);
+        _borrowFeeRepo.Received(3).InsertBorrowFees(Arg.Any<BorrowFeeDto>());
     }
 
     [Test]
-    public void should_call_repo_to_get_all_member_pk_and_create_day()
+    public async Task should_call_repo_to_get_all_member_pk_and_create_day()
     {
-        _transactionService.CreateTransactions(AnyTrxNumber);
-        _memberRepo.Received().GetAllMembersPkAndCreateDay();
+        GivenMembersData(new Member());
+        await _transactionService.CreateRandomTransactions(AnyTrxNumber);
+        await _memberRepo.Received().GetAllMembersPkAndCreateDay();
+    }
+
+    private void GivenMembersData(params Member[] returnThis)
+    {
+        _memberRepo.GetAllMembersPkAndCreateDay().Returns(returnThis.ToList());
     }
 }

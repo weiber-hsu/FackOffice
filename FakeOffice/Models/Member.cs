@@ -14,10 +14,23 @@ public class Member
 
     public void GetInvitationCode()
     {
-        var next = new Random().Next(0,999999999);
+        var next = new RandomProvider().Next(0,999999999);
         var hashCode = DateTime.Now.GetHashCode();
         var beforeEncrypt = next.ToString() + hashCode.ToString();
         var afterEncrypt =  SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(beforeEncrypt));
         invitation_code = BitConverter.ToString(afterEncrypt).Replace("-", "").Substring(0,7);
+    }
+
+    public BorrowFeeDto BorrowFeeDto()
+    {
+        var random = new RandomProvider();
+        var borrowFeeDto = new BorrowFeeDto
+        {
+            MemberFk = pk,
+            BorrowFee = random.Next(0,99999),
+            CreateTime =random.GetRandomDateAfter(create_time, 18)
+        };
+
+        return borrowFeeDto;
     }
 }

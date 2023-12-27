@@ -2,5 +2,5 @@
 
 public interface ITransactionService
 {
-    Task CreateTransactions(int trxNumber);
+    Task CreateRandomTransactions(int trxNumber);
 }

@@ -31,21 +31,21 @@ a. V
 Given: user
 When: sign up
 Then: create user in DB, and agent_fk=0
-
-Given: unsign up user, 1000 user in DB with invitation_code
+V
+Given: unsign up user, (1000) user in DB with invitation_code
 When: sign up with recommend=invitation_code(in DB)
 Then: create user in DB, and agent_fk = invitation_code owner
 -------
-b.
+b.V
 G: user
 W: successfully sign up
 T: show 7-digit invitation_code
 -------
 c
-C沒有明確定義"客戶"的狀態, 這邊假定剛註冊成功的客戶
-G: user
-W: sign up successfully
-T: set sign up time to 1 year, and random create 1000 raw datas with in the year to this user.
+
+G: user and API
+W: call API with user pk
+T: create 1000 trx with create time within a year to user 
 -------
 2.
 沒有定義觸發事件, 這邊寫一個 get api 來觸發
