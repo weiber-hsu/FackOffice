@@ -6,5 +6,5 @@ public class BorrowFeeDto
     public int Pk { get; set; }
     public int Type { get; set; }
     public decimal BorrowFee { get; set; }
-    public DateTime? CreateTime { get; set; }
+    public DateTime CreateTime { get; set; }
 }

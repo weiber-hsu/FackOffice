@@ -15,12 +15,16 @@ class BorrowFeeRepo : IBorrowFeeRepo
     }
     public async Task InsertBorrowFees(BorrowFeeDto borrowFees)
     {
-        var sql = $"IF EXISTS (SELECT 1 FROM borrow_fee WHERE member_fk = {borrowFees.MemberFk} " +
-                           $"BEGIN INSERT INTO borrow_fee (member_fk, type, borrow_fee, create_time)" +
-                           $" VALUES ({borrowFees.MemberFk}, 1, {borrowFees.BorrowFee}, '{borrowFees.CreateTime}') end "+
-                           "else BEGIN INSERT INTO borrow_fee (member_fk, type, borrow_fee, create_time)" +
-                           $" VALUES ({borrowFees.MemberFk}, 2, {borrowFees.BorrowFee}, '{borrowFees.CreateTime}') end ";
+        var checkExsistSql = $"SELECT count(1) FROM borrow_fee WHERE member_fk = {borrowFees.MemberFk}";
+        var hasExistBorrowFee =( await _dbConnection.QueryAsync<int>(checkExsistSql)).Single();
 
-        await _dbConnection.QueryAsync(sql);
+        borrowFees.Type = hasExistBorrowFee == 0
+            ? 1
+            : 2;
+
+        var insertSql = $"INSERT INTO borrow_fee (member_fk, type, borrow_fee, create_time)" +
+                $" VALUES ({borrowFees.MemberFk}, {borrowFees.Type}, {borrowFees.BorrowFee}, '{borrowFees.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")}') ";
+
+        await _dbConnection.QueryAsync(insertSql);
     }
 }
