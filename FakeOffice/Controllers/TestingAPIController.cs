@@ -19,7 +19,7 @@ public class TestingApiController : ControllerBase
         _transactionService = transactionService;
     }
 
-    [HttpGet]
+    [HttpGet("member/{memberId}")]
     public async Task<IActionResult> GetMember(int memberId)
     {
         var member = await _memberRepo.Get(memberId);
@@ -30,6 +30,11 @@ public class TestingApiController : ControllerBase
     public async Task<IActionResult> CreateFakeTrx(int trxNumber)
     {
         await _transactionService.CreateRandomTransactions(trxNumber);
+        return Ok();
+    }
+    [HttpGet("Generate-Transactions/{memberId}")]
+    public async Task<IActionResult> GenerateTransactions(int memberId)
+    {
         return Ok();
     }
     

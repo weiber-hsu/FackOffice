@@ -41,13 +41,13 @@ G: user
 W: successfully sign up
 T: show 7-digit invitation_code
 -------
-c
+c -> 開 API
 
 G: user and API
 W: call API with user pk
 T: create 1000 trx with create time within a year to user 
 -------
-2.
+2. V -> 開 API
 沒有定義觸發事件, 這邊寫一個 get api 來觸發
 G: an api
 W: some one call the api
