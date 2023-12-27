@@ -20,7 +20,6 @@ public class TransactionService : ITransactionService
     public async Task CreateRandomTransactions(int trxNumber)
     {
         var allMembersPkAndCreateDay = await _memberRepo.GetAllMembersPkAndCreateDay();
-
         if (allMembersPkAndCreateDay.Count == 0)
         {
             return;
@@ -28,7 +27,13 @@ public class TransactionService : ITransactionService
         for (var i = 0; i < trxNumber; i++)
         {
             var randomMember = allMembersPkAndCreateDay[_random.Next(0, allMembersPkAndCreateDay.Count - 1)];
-            await _borrowFeeRepo.InsertBorrowFees(randomMember.BorrowFeeDto());
+            await CreateTransactionsWith(randomMember, 18);
         }
+    }
+
+    public async Task CreateTransactionsWith(Member member, int randomMonth)
+    {
+        var borrowFeeDtoWithRandomDay = member.CreateBorrowFeeDtoWithRandomDay(randomMonth);
+        await _borrowFeeRepo.InsertBorrowFees(borrowFeeDtoWithRandomDay);
     }
 }

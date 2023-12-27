@@ -21,14 +21,14 @@ public class Member
         invitation_code = BitConverter.ToString(afterEncrypt).Replace("-", "").Substring(0,7);
     }
 
-    public BorrowFeeDto BorrowFeeDto()
+    public BorrowFeeDto CreateBorrowFeeDtoWithRandomDay(int month)
     {
         var random = new RandomProvider();
         var borrowFeeDto = new BorrowFeeDto
         {
             MemberFk = pk,
             BorrowFee = random.Next(0,99999),
-            CreateTime =random.GetRandomDateAfter(create_time, 18)
+            CreateTime =random.GetRandomDateAfter(create_time, month)
         };
 
         return borrowFeeDto;

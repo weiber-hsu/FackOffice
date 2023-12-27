@@ -10,8 +10,8 @@ namespace FakeOffice.Controllers;
 [Route("api")]
 public class TestingApiController : ControllerBase
 {
-    private IMemberRepo _memberRepo;
-    private ITransactionService _transactionService;
+    private readonly IMemberRepo _memberRepo;
+    private readonly ITransactionService _transactionService;
 
     public TestingApiController(IMemberRepo memberRepo, ITransactionService transactionService)
     {
@@ -32,9 +32,16 @@ public class TestingApiController : ControllerBase
         await _transactionService.CreateRandomTransactions(trxNumber);
         return Ok();
     }
+    
     [HttpGet("Generate-Transactions/{memberId}")]
     public async Task<IActionResult> GenerateTransactions(int memberId)
     {
+        var member = await _memberRepo.Get(memberId);
+
+        for (int i = 0; i < 1000; i++)
+        {
+            await _transactionService.CreateTransactionsWith(member, 12);
+        }
         return Ok();
     }
     
