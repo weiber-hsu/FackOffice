@@ -34,14 +34,14 @@ public class RegisterServiceTests
     public async Task should_return_invitation_code()
     {
         await _registerService.RegisterUser(GivenRegisterDto(AnyUserName, AnyRecommend));
-        await _memberRepo.Received().Register(Arg.Is<Member>(m => m.invitation_code.Length == 7));
+        await _memberRepo.Received().Register(Arg.Is<Member>(m => m.invitation_code!.Length == 7));
     }
 
     [Test]
     public async Task should_call_get_member_by_invitation_code()
     {
         await _registerService.RegisterUser(GivenRegisterDto(AnyUserName, AnyRecommend));
-        await _memberRepo.Received().GetMemberByInvitationCode(AnyRecommend);
+        await _memberRepo.Received().GetMemberByInvitationCode(AnyRecommend!);
     }
 
     [Test]

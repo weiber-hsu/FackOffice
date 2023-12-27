@@ -10,7 +10,6 @@ namespace FakeOfficeUnitTests;
 
 public class RegisterControllerTests
 {
-    private const string? AnyInvitationCode = "AnyCode";
     private RegisterController _registerController;
     private IRegisterService _registerService;
 

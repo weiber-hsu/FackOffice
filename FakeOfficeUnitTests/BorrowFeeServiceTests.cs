@@ -26,7 +26,7 @@ public class BorrowFeeServiceTests
     {
         GivenMembersData(new Member());
         await _borrowFeeService.CreateRandomTransactions(AnyTrxNumber);
-        _borrowFeeRepo.Received().InsertBorrowFees(Arg.Any<BorrowFeeDto>());
+        await _borrowFeeRepo.Received().InsertBorrowFees(Arg.Any<BorrowFeeDto>());
     }
 
     [Test]
@@ -38,7 +38,7 @@ public class BorrowFeeServiceTests
             new Member() { pk = 3, create_time = DateTime.Now, }
             );
         await _borrowFeeService.CreateRandomTransactions(3);
-        _borrowFeeRepo.Received(3).InsertBorrowFees(Arg.Any<BorrowFeeDto>());
+        await _borrowFeeRepo.Received(3).InsertBorrowFees(Arg.Any<BorrowFeeDto>());
     }
 
     [Test]
