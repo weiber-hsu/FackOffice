@@ -7,7 +7,7 @@ namespace FakeOffice.Controllers;
 
 //may add white list for internal testing security
 [ApiController]
-[Route("api")]
+[Route("internal/api")]
 public class TestingApiController : ControllerBase
 {
     private readonly IMemberRepo _memberRepo;
